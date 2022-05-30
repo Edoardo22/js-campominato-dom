@@ -32,6 +32,8 @@ function renderGriglia(numeroCelle, listaBombe) {
         cella.addEventListener("click", function () {
             const cellIndex = +this.dataset.indice;
             console.log(cellIndex);
+            cella.style.backgroundColor = "blue";
+            cell.classList
             if (listaBombe.includes(i + 1)) {
                 cell.classList.add("bomba");
             }
