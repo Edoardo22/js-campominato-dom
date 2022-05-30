@@ -28,12 +28,13 @@ function renderGriglia(numeroCelle, listaBombe) {
         let cella = document.createElement("div");
         cella.classList.add("cella");
         cella.dataset.indice = i + 1;
-        if (listaBombe.includes(i + 1)) {
-            cella.dataset.bomba = true;
-        }
+
         cella.addEventListener("click", function () {
             const cellIndex = +this.dataset.indice;
             console.log(cellIndex);
+            if (listaBombe.includes(i + 1)) {
+                cell.classList.add("bomba");
+            }
         });
         containerGriglia.append(cella);
     }
