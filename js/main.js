@@ -1,49 +1,44 @@
-const containerGriglia = document.getElementById("containerGriglia");
 
-function generateRandomNumbers(min, max) {
+function generaBombe(maxNumber) {
 
-    const result = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    return result;
-}
-
-function generateUniqueRandomNumbers(min, max, listaNumeriGiaGenerati) {
-    let numeroRandom;
+    const listaBombe = [];
     do {
-
-        numeroRandom = generateRandomNumbers(min, max);
-    } while (listaNumeriGiaGenerati.includes(numeroRandom));
-
-    return numeroRandom;
-}
-const numeriGenerati = [];
-let bombeGenerate = [];
-
-function generaBombe() {
-    let numeroRandom;
-    do {
-        numeroRandom = generateUniqueRandomNumbers(1, 64, numeriGenerati);
-    } while (bombeGenerate.includes(numeroRandom));
-    bombeGenerate.push(numeroRandom);
-
-}
-let c = 0;
-
-for (let i = 0; i < 64; i++) {
-    const randomNumber = generateUniqueRandomNumbers(1, 64, numeriGenerati);
-    numeriGenerati.push(randomNumber);
-    generaBombe();
-    if (bombeGenerate.includes(randomNumber)) {
-        c++;
+        const randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+        if (!listaBombe.includes(randomNumber)) {
+            listaBombe.push(randomNumber);
+        }
     }
-    let cella = document.createElement("div");
-    cella.classList.add("cella");
-    cella.innerHTML = `<span>${randomNumber}</span>`;
-    containerGriglia.append(cella);
-    cella.addEventListener("click", function () {
-
-        cella.style.backgroundColor = "blue";
-
-
-    })
+    while (listaBombe.length < 16)
+    return listaBombe;
 }
+
+
+
+function generaGriglia() {
+    const numeroCelle = 8 * 8;
+    let listaBombe = generaBombe(numeroCelle);
+    console.log(listaBombe);
+    renderGriglia(numeroCelle, listaBombe);
+}
+
+function renderGriglia(numeroCelle, listaBombe) {
+    const containerGriglia = document.getElementById("containerGriglia");
+
+    for (let i = 0; i < 64; i++) {
+        let cella = document.createElement("div");
+        cella.classList.add("cella");
+        cella.dataset.indice = i + 1;
+        if (listaBombe.includes(i + 1)) {
+            cella.dataset.bomba = true;
+        }
+        cella.addEventListener("click", function () {
+            const cellIndex = +this.dataset.indice;
+            console.log(cellIndex);
+        });
+        containerGriglia.append(cella);
+    }
+
+}
+
+
+renderGriglia();
