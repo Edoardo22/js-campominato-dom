@@ -33,9 +33,9 @@ function renderGriglia(numeroCelle, listaBombe) {
             const cellIndex = +this.dataset.indice;
             console.log(cellIndex);
             cella.style.backgroundColor = "blue";
-            cell.classList
-            if (listaBombe.includes(i + 1)) {
-                cell.classList.add("bomba");
+            if (listaBombe.include(i + 1)) {
+                cella.style.backgroundColor = "red";
+                alert("hai perso");
             }
         });
         containerGriglia.append(cella);

@@ -8,7 +8,3 @@
     width: calc(100% / 4);
     margin: 0 auto;
 }
-
-.cella.bomb {
-    background-color: red;
-}
