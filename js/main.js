@@ -27,7 +27,7 @@ function renderGriglia(numeroCelle, listaBombe) {
     for (let i = 0; i < 64; i++) {
         let cella = document.createElement("div");
         cella.classList.add("cella");
-        cella.dataset.indice = i + 1;
+        cella.textContent = i + 1;
 
         cella.addEventListener("click", function () {
             const cellIndex = +this.dataset.indice;
