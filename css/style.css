@@ -5,6 +5,10 @@
 }
 
 #containerGriglia {
-    width: calc(100% / 4);
+    width: calc(100% / 4 + 50px);
     margin: 0 auto;
+}
+
+.bomba {
+    background-color: red;
 }

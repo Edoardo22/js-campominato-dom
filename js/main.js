@@ -1,47 +1,48 @@
+const listaBombe = [];
+let punti = 0;
+function renderGriglia() {
+    const containerGriglia = document.getElementById("containerGriglia");
+    const numeroCelle = 8 * 8;
 
-function generaBombe(maxNumber) {
 
-    const listaBombe = [];
-    do {
-        const randomNumber = Math.floor(Math.random() * maxNumber) + 1;
-        if (!listaBombe.includes(randomNumber)) {
+    for (let i = 0; listaBombe.length < 16; i++) {
+        const randomNumber = Math.floor(Math.random() * numeroCelle) + 1;
+        if (listaBombe.indexOf(randomNumber)) {
             listaBombe.push(randomNumber);
         }
     }
-    while (listaBombe.length < 16)
-    return listaBombe;
-}
 
 
-
-function generaGriglia() {
-    const numeroCelle = 8 * 8;
-    let listaBombe = generaBombe(numeroCelle);
-    console.log(listaBombe);
-    renderGriglia(numeroCelle, listaBombe);
-}
-
-function renderGriglia(numeroCelle, listaBombe) {
-    const containerGriglia = document.getElementById("containerGriglia");
-
-    for (let i = 0; i < 64; i++) {
+    for (let i = 0; i < numeroCelle; i++) {
         let cella = document.createElement("div");
         cella.classList.add("cella");
         cella.textContent = i + 1;
-
+        cella.dataset.indice = i + 1;
         cella.addEventListener("click", function () {
             const cellIndex = +this.dataset.indice;
             console.log(cellIndex);
-            cella.style.backgroundColor = "blue";
-            if (listaBombe.include(i + 1)) {
+
+            if (listaBombe.includes(cellIndex)) {
                 cella.style.backgroundColor = "red";
                 alert("hai perso");
+                containerGriglia.innerHTML = "";
+                renderGriglia();
+
+            } else if (punti == 48) {
+                alert("hai vinto");
+                containerGriglia.innerHTML = "";
+                renderGriglia();
+            } else {
+                punti = punti + 1;
+                cella.style.backgroundColor = "blue";
             }
         });
         containerGriglia.append(cella);
+
     }
 
 }
 
 
 renderGriglia();
+
